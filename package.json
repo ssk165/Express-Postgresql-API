@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/src/server.js'",
-    "test": "jasmine-ts",
+    "test": "jasmine",
     "tsc": "tsc"
   },
   "author": "Udacity",
@@ -32,6 +32,7 @@
     "jasmine": "^3.6.4",
     "jasmine-spec-reporter": "^6.0.0",
     "jasmine-ts": "^0.3.0",
+    "request": "^2.88.2",
     "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9"
   }
