@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+This repo contains the API build on Express, Typscript and Posgresql for storefront project.
 
 ## Required Technologies
 Your application must make use of the following libraries:
@@ -12,6 +12,53 @@ Your application must make use of the following libraries:
 - db-migrate from npm for migrations
 - jsonwebtoken from npm for working with JWTs
 - jasmine from npm for testing
+
+
+## Steps to run the project:
+
+1) Run "npm i" to install all the modules
+
+2) Setup te Datbase:
+   -- "sudo -u postgres psql" to open postgres terminal
+   -- "CREATE USER <username> WITH PASSWORD <password>;" to create the user.
+   -- "CREATE DATABASE <database_name>;" to create the new database.
+   -- "\c <database_name>" to connect to newly created databse
+   -- "GRANT ALL PRIVILEGES ON DATABASE <database_name> to <username>;" to grant the permission.
+   -- "\q" to come out of the postgres terminal.
+
+3) Create .env File inside project folder with following details:
+   DATABASE_NAME=<database_name>
+   DATABASE_HOST=<hostname>
+   DATABASE_USERNAME=<database_username>
+   DATABASE_PASSWORD=<database_password>
+   DATABASE_PORT=<port>
+   JWTSECRET=<JWTSecret>
+4) Run Command : "db-migrate up -m ./migrations/ --config ./config/database.json" to run the migrations.
+
+5) "npm run watch" to start the server.
+
+6) "npm run test" for testing the apis.
+
+
+
+## API Structure:
+    
+    -- Endpoint to generate the auth token  : 0.0.0.0:3000/users/generatetoken [GET]
+
+    # Users Model [id,firstname,lastname,password]:
+    -- To get User by ID: 0.0.0.0:3000/users/:id [GET] [Token Required]
+    -- To get List of all the users: 0.0.0.0:3000/users/all [GET] [Token Required]
+    -- To create a new user: 0.0.0.0:3000/users/ [POST] [Token Required] [{firstname,lastname,password}]
+
+    # Products Model [id,name,price]:
+    -- To get Product by ID: 0.0.0.0:3000/products/:id [GET] [Token Required]
+    -- To get List of all the products: 0.0.0.0:3000/products/all [GET] [Token Required]
+    -- To create a new product: 0.0.0.0:3000/products/ [POST] [Token Required] [{name,price}]
+
+    # Order Model [id,product_id,quantity,user_id,status]:
+    -- To get Order by user id: 0.0.0.0:3000/orders/:userid [GET] [Token Required]
+
+ 
 
 ## Steps to Completion
 
