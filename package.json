@@ -5,13 +5,15 @@
   "main": "server.ts",
   "scripts": {
     "start": "node src/server.ts",
-    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
+    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/src/server.js'",
     "test": "jasmine-ts",
     "tsc": "tsc"
   },
   "author": "Udacity",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/cors": "^2.8.10",
     "@types/express": "^4.17.9",
     "@types/pg": "^7.14.7",
     "body-parser": "^1.19.0",
