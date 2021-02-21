@@ -3,11 +3,17 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv';
 import cors from 'cors';
 import {Users} from './routes/users';
+import {Products} from './routes/products';
+import {Orders} from './routes/orders';
 
 const app: express.Application = express()
 const address: string = "0.0.0.0:3000"
 
 dotenv.config();
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -15,10 +21,9 @@ app.use(cors());
 app.get('/', function (req: Request, res: Response) {
     res.send('API Running!')
 })
-app.use('/api/users', Users);
-// app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/products', require('./routes/products'));
-// app.use('/api/orders', require('./routes/orders'));
+app.use('/users', Users);
+app.use('/products', Products);
+app.use('/orders', Orders);
 
 app.listen(3000, function () {
     console.log(`starting app on: ${address}`)
