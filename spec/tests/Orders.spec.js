@@ -11,7 +11,6 @@ describe("Order Test", () => {
     });
     it("/order/id Test where id = userid", (done) => {
         let status = 0;
-        console.log(token);
         Request.get({url:`${url}/orders/2`,headers:{'x-auth-token':token}}, (error, response, body) => {
             console.log(response.statusCode);
             status = response.statusCode;
