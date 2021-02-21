@@ -1,7 +1,6 @@
 import { Response, Request, Router } from 'express';
 import { database } from '../../config/database';
 import { Auth } from '../middleware/auth';
-import bcrypt from 'bcrypt';
 
 
 export const Orders: Router = Router();

@@ -6,20 +6,24 @@ import bcrypt from 'bcrypt';
 
 export const Users: Router = Router();
 
-Users.post('/',Auth, async (req: Request, res: Response) => {
+Users.post('/', Auth, async (req: Request, res: Response) => {
 
     const { firstname, lastname, password } = req.body;
     console.log(req.body);
-    const newpassword = await bcrypt.hashSync(password, 5);
+    if (firstname === undefined || lastname === undefined || password === undefined) {
+        res.send('Provide all the details');
+    } else {
+        const newpassword = await bcrypt.hashSync(password, 5);
 
-    database.query(`INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *`,
-        [firstname, lastname, newpassword], (error, user) => {
-            if (error) {
-                res.status(500).send('Server error');
-            } else {
-                res.json({ msg: 'User Created' });
-            }
-        });
+        database.query(`INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *`,
+            [firstname, lastname, newpassword], (error, user) => {
+                if (error) {
+                    res.status(500).send('Server error');
+                } else {
+                    res.json({ msg: 'User Created' });
+                }
+            });
+    }
 })
 
 Users.get('/generatetoken', async (req: Request, res: Response) => {
