@@ -28,11 +28,11 @@ Your application must make use of the following libraries:
 
 3) Create .env File inside project folder with following details: \
    DATABASE_NAME=<database_name> \
-   DATABASE_HOST=<hostname> \
+   DATABASE_HOST=<database_hostname> \
    DATABASE_USERNAME=<database_username> \
    DATABASE_PASSWORD=<database_password> \
-   DATABASE_PORT=<port>  \
-   JWTSECRET=<JWTSecret>  \
+   DATABASE_PORT=<database_port>  \
+   JWTSECRET=<database_JWTSecret>  \
 4) Run Command : "db-migrate up -m ./migrations/ --config ./config/database.json" to run the migrations.  
 
 5) "npm run watch" to start the server.   
