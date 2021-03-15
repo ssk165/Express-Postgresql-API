@@ -3,26 +3,21 @@ import { database } from '../../config/database';
 import { Auth } from '../middleware/auth';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { UserStore } from '../models/users';
 
 export const Users: Router = Router();
+const store = new UserStore();
 
 Users.post('/', Auth, async (req: Request, res: Response) => {
 
     const { firstname, lastname, password } = req.body;
     console.log(req.body);
-    if (firstname === undefined || lastname === undefined || password === undefined) {
-        res.send('Provide all the details');
-    } else {
-        const newpassword = await bcrypt.hashSync(password, 5);
-
-        database.query(`INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *`,
-            [firstname, lastname, newpassword], (error, user) => {
-                if (error) {
-                    res.status(500).send('Server error');
-                } else {
-                    res.json({ msg: 'User Created' });
-                }
-            });
+    try {
+        const products = await store.create(firstname,lastname,password);
+        res.json(products);
+      } catch(err) {
+        res.status(400)
+        res.json(err)
     }
 })
 
@@ -48,23 +43,23 @@ Users.get('/generatetoken', async (req: Request, res: Response) => {
 
 Users.get('/all', Auth, async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    database.query(`SELECT * FROM users`, (error, user) => {
-        if (error) {
-            res.status(500).send('Server error');
-        } else {
-            res.json(user.rows);
-        }
-    });
+    try {
+        const products = await store.all();
+        res.json(products);
+      } catch(err) {
+        res.status(400)
+        res.json(err)
+    }
 })
 
 Users.get('/:id', Auth, async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-    database.query(`SELECT * FROM users WHERE id = $1`, [id], (error, user) => {
-        if (error) {
-            res.status(500).send('Server error');
-        } else {
-            res.json(user.rows);
-        }
-    });
+    try {
+        const products = await store.getProductById(id);
+        res.json(products);
+      } catch(err) {
+        res.status(400)
+        res.json(err)
+    }
 })
 
