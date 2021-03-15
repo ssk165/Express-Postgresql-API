@@ -26,7 +26,7 @@ export class UserStore {
         if (firstname === undefined || lastname === undefined || password === undefined) {
             throw new Error(`Product not found`)
         } else {
-            const newpassword = await bcrypt.hashSync(password, 5);
+            const newpassword = await bcrypt.hashSync(password, parseInt(`${process.env.SALTROUND}`));
     
             database.query(`INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *`,
                 [firstname, lastname, newpassword], (error, user) => {

@@ -32,7 +32,9 @@ Your application must make use of the following libraries:
    DATABASE_USERNAME=<database_username> \
    DATABASE_PASSWORD=<database_password> \
    DATABASE_PORT=<database_port>  \
-   JWTSECRET=<database_JWTSecret>  
+   JWTSECRET=<database_JWTSecret> \
+   SALTROUND=<SALT_ROUND>  
+   
 4) Run Command : "db-migrate up -m ./migrations/ --config ./config/database.json" to run the migrations.  
 
 5) "npm run watch" to start the server.   

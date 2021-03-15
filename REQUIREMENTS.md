@@ -4,28 +4,29 @@ The company stakeholders want to create an online storefront to showcase their g
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
 ## API Endpoints
-#### Products
-- Index 
-- Show (args: product id)
-- Create (args: Product)[token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+    
+    -- Endpoint to generate the auth token  : 0.0.0.0:3000/users/generatetoken [GET]
 
-#### Users
-- Index [token required]
-- Show (args: id)[token required]
-- Create (args: User)[token required]
+    # Users Model [id,firstname,lastname,password]:
+    -- To get User by ID: 0.0.0.0:3000/users/:id [GET] [Token Required]
+    -- To get List of all the users: 0.0.0.0:3000/users/all [GET] [Token Required]
+    -- To create a new user: 0.0.0.0:3000/users/ [POST] [Token Required] [{firstname,lastname,password}]
 
-#### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+    # Products Model [id,name,price]:
+    -- To get Product by ID: 0.0.0.0:3000/products/:id [GET] [Token Required]
+    -- To get List of all the products: 0.0.0.0:3000/products/all [GET] [Token Required]
+    -- To create a new product: 0.0.0.0:3000/products/ [POST] [Token Required] [{name,price}]
 
-## Data Shapes
+    # Order Model [id,product_id,quantity,user_id,status]:
+    -- To get Order by user id: 0.0.0.0:3000/orders/:userid [GET] [Token Required]
+
+
+## Data Schema
+    
 #### Product
 -  id
 - name
 - price
-- [OPTIONAL] category
 
 #### User
 - id
@@ -35,8 +36,9 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 #### Orders
 - id
-- id of each product in the order
+- id of each product in the order [Foreign Key]
 - quantity of each product in the order
-- user_id
+- user_id [Foreign Key]
 - status of order (active or complete)
+
 
