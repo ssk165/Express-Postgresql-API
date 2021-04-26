@@ -30,7 +30,7 @@ Products.get('/:id', Auth, async (req: Request, res: Response) => {
 
 
 Products.post('/', Auth, async (req: Request, res: Response) => {
-    const { name, price } = req.body;
+    const { name, price} = req.body;
     try {
         const products = await store.create(name,price);
         res.json(products);

@@ -17,28 +17,37 @@ These are the notes from a meeting with the frontend developer that describe wha
     -- To get List of all the products: 0.0.0.0:3000/products/all [GET] [Token Required]
     -- To create a new product: 0.0.0.0:3000/products/ [POST] [Token Required] [{name,price}]
 
-    # Order Model [id,product_id,quantity,user_id,status]:
-    -- To get Order by user id: 0.0.0.0:3000/orders/:userid [GET] [Token Required]
+    # Order Model [id,product_id,status]:
+    -- To get Order by user id: 0.0.0.0:3000/orders/:order_id [GET] [Token Required]
+    
+    # Order-Product Model [id,product_id,quantity,user_id,status]:
+    -- To create order_product join: 0.0.0.0:3000/orders/:orderid/products/:productid [POST] [Token Required] [{order_id,product_id,quantity}]
 
 
 ## Data Schema
     
-#### Product
+#### Product (TableName - products)
 -  id
 - name
 - price
 
-#### User
+#### User (TableName - users)
 - id
 - firstName
 - lastName
 - password
 
-#### Orders
+#### Orders (TableName - orders)
 - id
-- id of each product in the order [Foreign Key]
-- quantity of each product in the order
-- user_id [Foreign Key]
-- status of order (active or complete)
+- user_id [Foreign Key] [users table]
+- status (Complete or Pending)
+
+
+#### Orders (TableName - orders_products)
+- id
+- user_id [Foreign Key] [users table]
+- product_id [Foreign Key] [products table]
+- quantity
+
 
 

@@ -58,7 +58,10 @@ Your application must make use of the following libraries:
     -- To create a new product: 0.0.0.0:3000/products/ [POST] [Token Required] [{name,price}]
 
     # Order Model [id,product_id,quantity,user_id,status]:
-    -- To get Order by user id: 0.0.0.0:3000/orders/:userid [GET] [Token Required]
+    -- To get Order by user id: 0.0.0.0:3000/orders/:order_id [GET] [Token Required]
+
+    # Order-Product Model [id,product_id,quantity,user_id,status]:
+    -- To create order_product join: 0.0.0.0:3000/orders/:orderid/products/:productid [POST] [Token Required] [{order_id,product_id,quantity}]
 
  
 

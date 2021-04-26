@@ -8,9 +8,9 @@ export const Orders: Router = Router();
 const store = new OrderStore();
 
 Orders.get('/:id', Auth, async (req: Request, res: Response) => {
-    const user_id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     try {
-        const products = await store.all(user_id);
+        const products = await store.all(id);
         res.json(products);
       } catch(err) {
         res.status(400)
