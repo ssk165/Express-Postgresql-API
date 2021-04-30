@@ -4,10 +4,15 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "node src/server.ts",
+    "build": "tsc --esModuleInterop src/server.ts --outDir ./dist",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/src/server.js'",
-    "test": "jasmine",
-    "tsc": "tsc"
+    "start": "npm run build && cross-env NODE_ENV=dev DEBUG=app:* node ./dist/src/server.js",
+    "start:prod": "npm run build && npm run minify && cross-env NODE_ENV=dev DEBUG=app:main,app:endpoint node ./dist/src/server.js",
+    "db:create:test": "cross-env NODE_ENV=test db-migrate up",
+    "db:destroy:test": "cross-env NODE_ENV=test db-migrate reset",
+    "db:create:dev": "cross-env NODE_ENV=dev db-migrate up",
+    "db:destroy:dev": "cross-env NODE_ENV=dev db-migrate reset",
+    "test": "cross-env NODE_ENV=test jasmine"
   },
   "author": "Udacity",
   "license": "ISC",
@@ -20,6 +25,7 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

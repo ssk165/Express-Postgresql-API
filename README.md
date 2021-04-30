@@ -32,12 +32,23 @@ Your application must make use of the following libraries:
    DATABASE_USERNAME=<database_username> \
    DATABASE_PASSWORD=<database_password> \
    DATABASE_PORT=<database_port>  \
+   TEST_DATABASE_NAME=<test_database_name> \
+   TEST_DATABASE_HOST=<test_database_hostname> \
+   TEST_DATABASE_USERNAME=<test_database_username> \
+   TEST_DATABASE_PASSWORD=<test_database_password> \
+   TEST_DATABASE_PORT=<test_database_port>  \
    JWTSECRET=<database_JWTSecret> \
    SALTROUND=<SALT_ROUND>  
    
 4) Run Command : "db-migrate up -m ./migrations/ --config ./config/database.json" to run the migrations.  
 
-5) "npm run watch" to start the server.   
+OR
+
+4) Up test and dev environments
+   npm run db:create:test (Running Up test environment is necessary)
+   npm run db:create:dev
+
+5) "npm run start" to start the server.   
 
 6) "npm run test" for testing the apis.   
 

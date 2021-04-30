@@ -2,40 +2,31 @@ import { database } from '../../config/database';
 import bcrypt from 'bcrypt';
 
 export class UserStore {
-    async all(): Promise<any> {
-        database.query(`SELECT * FROM users`, (error, user) => {
-            if (error) {
-                throw new Error(`Product not found`)
-            } else {
-                return user.rows
-            }
-        });
+    async all(): Promise<object> {
+        let result;
+        result = await database.query(`SELECT * FROM users`);
+        console.log(result);
+        return result.rows;
     }
 
-    async getProductById(id: Number): Promise<any> {
-        database.query(`SELECT * FROM users WHERE id = $1`, [id], (error, user) => {
-            if (error) {
-                throw new Error(`Product not found`)
-            } else {
-                return user.rows;
-            }
-        });
+    async getProductById(id: Number): Promise<object> {
+        let result;
+        result = await database.query(`SELECT * FROM users WHERE id = $1`,[id]);
+        return result.rows;
     }
 
-    async create(firstname: any, lastname: any, password:any): Promise<any> {
+    async create(firstname: Text, lastname: Text, password: Text): Promise<object> {
+        let result;
         if (firstname === undefined || lastname === undefined || password === undefined) {
             throw new Error(`Product not found`)
         } else {
             const newpassword = await bcrypt.hashSync(password, parseInt(`${process.env.SALTROUND}`));
-    
-            database.query(`INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *`,
-                [firstname, lastname, newpassword], (error, user) => {
-                    if (error) {
-                        throw new Error(`Product not found`)
-                    } else {
-                        return { msg: 'User Created' };
-                    }
-                });
+
+            
+            result = await database.query(`INSERT INTO users (firstName, lastName, password) VALUES($1, $2, $3) RETURNING *`,
+                [firstname, lastname, newpassword]);
         }
+
+        return result.rows;
     }
 }
