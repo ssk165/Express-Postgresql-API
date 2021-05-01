@@ -43,7 +43,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - status (Complete or Pending)
 
 
-#### Orders (TableName - orders_products)
+#### OrdersProduct (TableName - orders_products)
 - id
 - user_id [Foreign Key] [users table]
 - product_id [Foreign Key] [products table]
